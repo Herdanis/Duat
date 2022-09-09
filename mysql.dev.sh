@@ -3,6 +3,11 @@
 # Import environment variable
 . .env
 
+# Delete file older than $TIME_PERIOD days by default is 30 day
+# Old version of find
+# find $PATH_BACKUP/$MYSQL_DATABASE* -mtime +$TIME_PERIOD -exec rm {} \;
+find $PATH_BACKUP -name "$MYSQL_DATABASE*.sql" -type f -mtime +$TIME_PERIOD -delete
+
 # set format time to naming scheme
 timestamp=$(date +%H-%d-%m-%Y)
 
